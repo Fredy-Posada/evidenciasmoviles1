@@ -5,6 +5,7 @@
 
 
 <!-- Su documentación aquí -->
+```java
 package com.mycompany.appconversor.java;
 
 
@@ -65,8 +66,9 @@ public class Divisas extends Conversor{
 
            
 }
-    
+ ```   
 
+```java
 package com.mycompany.appconversor.java;
 
 
@@ -143,9 +145,11 @@ public class Longitud extends Conversor {
     }
 }
 
+```
 
 
 
+```java
 package com.mycompany.appconversor.java;
 
 
@@ -183,7 +187,9 @@ public class Temperatura extends Conversor {
     }
 }
 
+```
 
+```java
 package com.mycompany.appconversor.java;
 
 
@@ -286,7 +292,9 @@ public class peso extends Conversor {
         }
     }
 }
+```
 
+```java
 package com.mycompany.appconversor.java;
 
 
@@ -337,8 +345,9 @@ public class programador extends Conversor{
 
         scanner.close();
     }
+```
 
-
+```java
 class programador {
     public static String decimalABinario(int decimal) {
         return Integer.toBinaryString(decimal);
@@ -373,3 +382,4 @@ public abstract class Conversor {
     
      public abstract double convertir(double cantidad);
 }
+```
