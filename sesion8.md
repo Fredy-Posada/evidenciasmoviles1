@@ -5,7 +5,7 @@
 
 
 <!-- Su documentación aquí -->
-
+```java
 package com.mycompany.activida8;
 
 
@@ -20,7 +20,8 @@ public class Activida8 {
     }
     
 }
-
+```
+```java
 package com.mycompany.activida8;
 
 
@@ -56,6 +57,8 @@ public class Album extends Musica{
          System.out.println("retrocede album");
    }
 }
+```
+```java
 package com.mycompany.activida8;
 
 
@@ -94,8 +97,8 @@ public class BandaSonora extends Musica {
     }
    
     }   
-    
-
+    ```
+```java
 package com.mycompany.activida8;
 
 
@@ -141,6 +144,8 @@ public class Cancion extends Musica{
     }   
     
 }
+```
+```java
 package com.mycompany.activida8;
 
 
@@ -158,7 +163,7 @@ abstract public class Musica {
             
 }
 
-    
+ ```   
 
    
     
