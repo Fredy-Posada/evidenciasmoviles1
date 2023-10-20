@@ -5,6 +5,7 @@
 
 ```java
 <!-- Su documentación aquí -->
+
 package com.mycompany.actvidad8m;
 
 import java.util.ArrayList;
@@ -25,37 +26,57 @@ public  class Actvidad8M {
      Album.stop();
         }
 }
-   package com.mycompany.actvidad8m;
+package com.mycompany.actvidad8m;
+import java.util.ArrayList;
 
-public abstract  class Musica {
-    private String titulo;
+public class Album extends Musica{
+    ArrayList<Cancion> Canciones = new  ArrayList<>();
+private int index = 0;
+Cancion CanCionatual;
 
-    public Musica(String titulo) {
-        this.titulo = titulo;
+    public Album(String titulo, ArrayList Canciones) {
+        super(titulo);
+        this.Canciones = Canciones;
+        this.CanCionatual = this.Canciones.get(index);
     }
 
-    public String getTitulo() {
-        return titulo;
+    
+
+    @Override
+    void play() {
+     CanCionatual =  Canciones.get(index);
+     CanCionatual.play();
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    @Override
+    void stop() {
+      CanCionatual.stop();
+      CanCionatual.stop();
+    }
+
+    @Override
+    void pause() {
+     CanCionatual.pause();
+        System.out.println("pause "+ this.getTitulo());
+    }
+
+    @Override
+    void next() {
+    if(index<Canciones.size())        
+    this.index++;   
+    }
+
+    @Override
+    void previous() {
+    if (index > 0)
+     this.index--;     
+    }
+
+    
+    
+        
     }
     
-    
-    
-    abstract void play();
-    abstract void stop();
-    abstract void pause();
-    abstract void next();
-    abstract void previous();
-
-    
-
-    
-    
-    
-}
 package com.mycompany.actvidad8m;
 
 
@@ -116,12 +137,35 @@ public class Cancion extends Musica{
     
 }
 
- 
-```   
+package com.mycompany.actvidad8m;
 
+public abstract  class Musica {
+    private String titulo;
 
+    public Musica(String titulo) {
+        this.titulo = titulo;
+    }
 
+    public String getTitulo() {
+        return titulo;
+    }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    
+    
+    
+    abstract void play();
+    abstract void stop();
+    abstract void pause();
+    abstract void next();
+    abstract void previous();
 
+    
 
-
+    
+    
+    
+}
+```
