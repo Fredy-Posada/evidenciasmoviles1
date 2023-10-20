@@ -6,25 +6,22 @@
 
 <!-- Su documentación aquí -->
 ```java
-package com.mycompany.appconversor.java;
+package com.mycompany.app10;
 
 
-public class AppconversorJava {
+public abstract class Conversor {
+    protected String unidadOrigen;
+    protected String unidadDestino;
 
-    public static void main(String[] args) {
-        Temperatura t1 = new Temperatura("Celcius", "Fahrenheit");
-        Temperatura t2 = new Temperatura("Fahrenheit", "Celcius");
-        
-        
-        System.out.println(t1.convertir(30));
-        
-        System.out.println(t2.convertir(30));
-
+    public Conversor(String unidadOrigen, String unidadDestino) {
+        this.unidadOrigen = unidadOrigen;
+        this.unidadDestino = unidadDestino;
     }
+    
+     public abstract double convertir(double cantidad);
 }
 
-
-package com.mycompany.appconversor.java;
+package com.mycompany.app10;
 
 
 public class Divisas extends Conversor{
@@ -66,10 +63,9 @@ public class Divisas extends Conversor{
 
            
 }
- ```   
+    
 
-```java
-package com.mycompany.appconversor.java;
+ackage com.mycompany.app10;
 
 
 public class Longitud extends Conversor {
@@ -82,8 +78,8 @@ public class Longitud extends Conversor {
 @Override
     public double convertir(double cantidad) {
         if (unidadOrigen.equals("metros") && unidadDestino.equals("pies")) {
-            // metros a pies
-            return cantidad * 3.281;
+            
+            return 0.0;
         } else if (unidadOrigen.equals("pies") && unidadDestino.equals("metros")) {
             // pies a metros
             return cantidad * 0.3048;
@@ -145,21 +141,15 @@ public class Longitud extends Conversor {
     }
 }
 
-```
-
-
-
-```java
-package com.mycompany.appconversor.java;
-
+package com.mycompany.app10;
 
 public class Temperatura extends Conversor {
 
     public Temperatura(String unidadOrigen, String unidadDestino) {
         super(unidadOrigen, unidadDestino);
     }
-    
-@Override
+
+    @Override
     public double convertir(double cantidad) {
         if (unidadOrigen.equals("Celsius") && unidadDestino.equals("Fahrenheit")) {
             // Celsius a Fahrenheit
@@ -187,10 +177,52 @@ public class Temperatura extends Conversor {
     }
 }
 
-```
+package com.mycompany.app10;
 
-```java
-package com.mycompany.appconversor.java;
+
+public class binario  extends Conversor{
+    
+  public binario(String unidadOrigen, String unidadDestino) {
+        super(unidadOrigen, unidadDestino);
+    }
+ public String decimalToBinary(int decimalNumber) {
+        return Integer.toBinaryString(decimalNumber);
+    }
+
+    public int binaryToDecimal(String binaryNumber) {
+        return Integer.parseInt(binaryNumber, 2);
+    }
+
+    public String decimalToHexadecimal(int decimalNumber) {
+        return Integer.toHexString(decimalNumber);
+    }
+
+    public int hexadecimalToDecimal(String hexadecimalNumber) {
+        return Integer.parseInt(hexadecimalNumber, 16);
+    }         
+  
+    @Override
+    public double convertir(double cantidad) {
+    if (unidadOrigen.equals("decimal") && unidadDestino.equals("binario")) {
+            return Double.parseDouble(decimalToBinary((int) cantidad));
+        } else if (unidadOrigen.equals("binario") && unidadDestino.equals("decimal")) {
+            return binaryToDecimal(String.valueOf((int) cantidad));
+        } else if (unidadOrigen.equals("decimal") && unidadDestino.equals("hexadecimal")) {
+            return Double.parseDouble(decimalToHexadecimal((int) cantidad));
+        } else if (unidadOrigen.equals("hexadecimal") && unidadDestino.equals("decimal")) {
+            return hexadecimalToDecimal(String.valueOf((int) cantidad));
+        } else {
+            throw new IllegalArgumentException("Unidades de conversión no compatibles");
+            
+            
+           
+        }
+     }
+
+    }  
+
+
+package com.mycompany.app10;
 
 
 public class peso extends Conversor {
@@ -206,10 +238,10 @@ public class peso extends Conversor {
         } else if (unidadOrigen.equals("libras") && unidadDestino.equals("kilogramos")) {
             // libras a kilogramos
             return cantidad * 0.453592;
-        } else if (unidadOrigen.equals("Gramos") && unidadDestino.equals(" Libras")) {
+        } else if (unidadOrigen.equals("gramos") && unidadDestino.equals(" libras")) {
             // Gramos a Libras.
             return cantidad * 0.00220462;
-        } else if (unidadOrigen.equals(" Libras") && unidadDestino.equals("Gramos")) {
+        } else if (unidadOrigen.equals(" libras") && unidadDestino.equals("Gramos")) {
             // libras a gramos
             return cantidad * 453.592;
         } else if (unidadOrigen.equals("Kilogramos") && unidadDestino.equals("Gramos")) {
@@ -251,7 +283,7 @@ public class peso extends Conversor {
             // Toneladas a Libras.
            
             return cantidad * 2204.62;
-            }else if (unidadOrigen.equals("Libras.") && unidadDestino.equals("Libras ")) {
+            }else if (unidadOrigen.equals("Libras.") && unidadDestino.equals("Toneladas ")) {
             // libras a toneladas
            
             return cantidad * 0.00045359;
@@ -292,94 +324,145 @@ public class peso extends Conversor {
         }
     }
 }
-```
 
-```java
-package com.mycompany.appconversor.java;
+package com.mycompany.app10;
 
+public class App10 {
 
-public class programador extends Conversor{
+    public static void main(String[] args) {
+        System.out.println("  ");
+        System.out.println("####TEMPERATURA#####   ");
+        System.out.println("  ");
+        Temperatura t1 = new Temperatura("Celsius", "Fahrenheit");
+        Temperatura t2 = new Temperatura("Fahrenheit", "Celsius");
+        Temperatura t3 = new Temperatura("Celsius", "Kelvin");
+        Temperatura t4 = new Temperatura("Kelvin", "Celsius");
+        Temperatura t5 = new Temperatura("Kelvin", "Fahrenheit");
+        Temperatura t6 = new Temperatura("Fahrenheit", "Kelvin");
 
-    public programador(String unidadOrigen, String unidadDestino) {
-        super(unidadOrigen, unidadDestino);
+        double res = t1.convertir(2);
+
+        System.out.println("de Celsius a Fahrenheit" + res);
+        res = t1.convertir(2);
+        System.out.println("de Celcius a Fahrenheit" + res);
+        res = t2.convertir(10);
+        System.out.println("de Fahrenheit a celcius" + res);
+        res = t3.convertir(22);
+        System.out.println("de Celcius a kelvin" + res);
+        res = t4.convertir(32);
+        System.out.println("Fahrenheit a kelvin" + res);
+        res = t5.convertir(24);
+        System.out.println("kelvin a Fahrenheit" + res);
+        res = t6.convertir(25);
+        System.out.println("Fahrenheit a kelvin" + res);
         
+        System.out.println("  ");
+        System.out.println("####LONGITUD#####   ");
+        System.out.println("  ");
+        
+         Longitud t10 = new Longitud("metros", "pies");
+        Longitud t11 = new Longitud("pies", "metros");
+        Longitud t12 = new Longitud("kilometros", "millas");
+        Longitud t13 = new Longitud("millas", "kilometros");
+        Longitud t14 = new Longitud("centimetros", "pulgadas");
+        Longitud t15 = new Longitud("pulgadas", "centimetros");
+        Longitud t16 = new Longitud("yardas", "metros");
+        Longitud t17 = new Longitud("metros", "yardas");
+        
+               
+        res = t10.convertir(26);       
+       System.out.println("metros a pies"+ res);
+       res = t11.convertir(29);
+       System.out.println("pies a metros"+ res);
+       res = t12.convertir(23);
+       System.out.println("kilometro a millas"+ res);
+       res = t13.convertir(32);
+       System.out.println("millas a kilometros"+ res);
+       res = t14.convertir(42);
+       System.out.println("centimetros a pulgadas"+ res);
+       res = t15.convertir(52);
+       System.out.println("pulgadas a centimetros"+ res);
+       res = t16.convertir(62);
+       System.out.println("yardas a metros"+ res);
+       res = t17.convertir(32);
+       System.out.println("metros a yardas "+ res);
+       
+        System.out.println("    ");
+        System.out.println("  ");
+        System.out.println("####PESO#####   ");
+        System.out.println("  ");
+        
+        peso t24 = new peso("Kilogramos", "libras");
+        res = t24.convertir(12);      
+        System.out.println("kilogramos a libras" + res);
+        
+        peso t25 = new peso("libras", "kilogramos");
+        res = t25.convertir(12);
+        System.out.println("libras a kilogramos  "+ res);
+        
+         peso t26 = new peso("Kilogramos", "Gramos");
+         res =t26.convertir(1);
+         System.out.println(" kilogramos a gramosmo"+ res);
+         
+         peso t27 = new peso( "Gramos","Kilogramos");
+         res =t27.convertir(1000);
+         System.out.println(" Gramos a kilogramos"+ res);
+         
+        peso t28 = new peso("Onzas","Libras");
+        res =t28.convertir(1000);
+        System.out.println("onzas a libras"+ res);
+        
+        System.out.println("    ");
+        System.out.println("####BINARIO#####   ");
+        System.out.println("  ");
+        
+        binario t29 = new binario("decimal","binario");
+        res = t29.convertir(200);
+        System.out.println("decimal a binario"+ res);
+        
+       
+        binario t32 = new binario("binario", "decimal");
+        binario t33 = new binario("decimal", "hexadecimal");
+        binario t34 = new binario("hexadecimal", "decimal");
+        
+        res = t32.convertir(100);
+        System.out.println(" binario a decimal " + res);
+        res = t33.convertir(50);
+        System.out.println(" decimal a hexadecimal " + res);
+        res = t34.convertir(20);
+        System.out.println(" hexadecimal a decimal " + res);
+        System.out.println("  ");
+        System.out.println("####DIVISAS#####   ");
+        System.out.println("  ");
+        
+        Divisas t35 = new  Divisas("Dólar estadounidense","Euro");
+        Divisas t36 = new  Divisas("Euro","Dólar estadounidense");
+        Divisas t37 = new  Divisas("Dólar estadounidense","Peso colombiano");
+        Divisas t38 = new  Divisas("Euro","Dólar estadounidense");
+        Divisas t39 = new  Divisas("Dólar estadounidense","Euro");
+        Divisas t40 = new  Divisas("Euro","Peso colombiano");
+         
+        
+       
+        
+        res = t35.convertir(25);
+        System.out.println("dolar estaunidense a euro "+ res);
+        res = t36.convertir(55);
+        System.out.println("Euro a dolar estaunidense "+ res);
+        res = t37.convertir(80);
+        System.out.println("Dolar Estaunidense a Peso Colombiano " + res);
+        
+        res = t38.convertir(10);
+        System.out.println("Euro a Dólar estadounidense "+ res);
+        res = t39.convertir(40);
+        System.out.println("Dólar estadounidense a Euro  "+ res);
+        res = t40.convertir(24);
+        System.out.println("Euro a peso colombiano "+ res);
+       
+        
+                
+        
+         
     }
-    
-    
-        System.out.println("Seleccione la conversión que desea realizar:");
-        System.out.println("1. Decimal a Binario");
-        System.out.println("2. Decimal a Hexadecimal");
-        System.out.println("3. Binario a Decimal");
-        System.out.println("4. Hexadecimal a Binario");
-
-        int opcion = scanner.nextInt();
-
-        switch (opcion) {
-            case 1:
-                System.out.print("Ingrese un número decimal: ");
-                int decimal = scanner.nextInt();
-                String binario = Programador.decimalABinario(decimal);
-                System.out.println("Resultado: " + binario);
-                break;
-            case 2:
-                System.out.print("Ingrese un número decimal: ");
-                int decimal2 = scanner.nextInt();
-                String hexadecimal = Programador.decimalAHexadecimal(decimal2);
-                System.out.println("Resultado: " + hexadecimal);
-                break;
-            case 3:
-                System.out.print("Ingrese un número binario: ");
-                String binario2 = scanner.next();
-                int decimal3 = Programador.binarioADecimal(binario2);
-                System.out.println("Resultado: " + decimal3);
-                break;
-            case 4:
-                System.out.print("Ingrese un número hexadecimal: ");
-                String hexadecimal2 = scanner.next();
-                String binario3 = Programador.hexadecimalABinario(hexadecimal2);
-                System.out.println("Resultado: " + binario3);
-                break;
-            default:
-                System.out.println("Opción no válida");
-        }
-
-        scanner.close();
-    }
-```
-
-```java
-class programador {
-    public static String decimalABinario(int decimal) {
-        return Integer.toBinaryString(decimal);
-    }
-
-    public static String decimalAHexadecimal(int decimal) {
-        return Integer.toHexString(decimal);
-    }
-
-    public static int binarioADecimal(String binario) {
-        return Integer.parseInt(binario, 2);
-    }
-
-    public static String hexadecimalABinario(String hexadecimal) {
-        return Integer.toBinaryString(Integer.parseInt(hexadecimal, 16));
-    }
-}
-
-
-
-package com.mycompany.appconversor.java;
-
-
-public abstract class Conversor {
-    protected String unidadOrigen;
-    protected String unidadDestino;
-
-    public Conversor(String unidadOrigen, String unidadDestino) {
-        this.unidadOrigen = unidadOrigen;
-        this.unidadDestino = unidadDestino;
-    }
-    
-     public abstract double convertir(double cantidad);
 }
 ```

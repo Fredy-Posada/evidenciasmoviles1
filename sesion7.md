@@ -6,7 +6,7 @@
 
 <!-- Su documentación aquí -->package com.mycompany.productos;
 
-
+```java
 public class Productos {
 
    
@@ -114,7 +114,7 @@ public class Productos {
 }
 }
     
-
+```
 
 
 
